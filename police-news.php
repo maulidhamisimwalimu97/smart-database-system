@@ -1,6 +1,7 @@
 <?php
-session_start();
+session_start(); // Start session to access session data
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title Page-->
-    <title>Admin-Dashboard</title>
+    <title>Police-Dashboard</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -18,26 +19,27 @@ session_start();
     <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
+
     <!-- Bootstrap CSS-->
     <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
-    <!-- Vendor CSS-->
-    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+     <!-- Bootstrap CSS-->
+     <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+     <!-- Vendor CSS-->
+     <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+     <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+     <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+     <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+     <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+     <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+     <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+ 
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
-    <link href="css/loader.css" rel="stylesheet" media="all">
-
-
 </head>
 
 <body>
-
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
@@ -46,59 +48,52 @@ session_start();
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li>
-                            <a href="dashboard.php">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard
-                            </a>
-                        </li>
-                        
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-user"></i>User</a>                            
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="user-reg.php">New user</a>
-                                </li>
-                                <li>
-                                    <a href="view-user.php">View User</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                    <i class="fas fa-building"></i>Department
-                                </a>                                
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="new-dep.php">New Department</a>
-                                </li>
-                                <li>
-                                    <a href="view-dep.php">View Department</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="has-sub">
-                            <a class="js-arrow" href="#">
-                                <i class="fas fa-newspaper"></i>News</a>
-                            <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                <li>
-                                    <a href="view-news.php">View News</a>
-                                </li>
-                            </ul>
-                        </li>
-                            <!-- Reports Section -->
-                            <li class="has-sub">
-                                <a class="js-arrow" href="#">
-                                    <i class="fas fa-chart-line"></i>Reports
-                                </a>
-                                <ul class="list-unstyled navbar__sub-list js-sub-list">
-                                    <li><a href="report.php">Generate Reports</a></li>
-                                </ul>
+                    <li>
+                        <a href="police_dashboard.php">
+                            <i class="fas fa-tachometer-alt"></i>Dashboard
+                        </a>
+                    </li>
+                    
+                    <li class="has-sub">
+                        <a class="js-arrow" href="#">
+                            <i class="fas fa-newspaper"></i>News
+                        </a>                            
+                        <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <li>
+                                <a href="news.php">New News</a>
                             </li>
-                            </ul>
-                        </li>
-                        
-                    </ul>
+                            <li>
+                                <a href="view-news.php">View News</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="has-sub">
+                        <a class="js-arrow" href="#">
+                            <i class="fas fa-building"></i>Report
+                        </a>                                
+                        <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <li>
+                                <a href="Greport.php">Generate Report</a>
+                            </li>
+                            <li>
+                                <a href="view-report.php">View Report</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="has-sub">
+                        <a class="js-arrow" href="#">
+                            <i class="fas fa-cogs"></i>Setting
+                        </a>
+                        <ul class="list-unstyled navbar__sub-list js-sub-list">
+                            <li>
+                                <a href="password.php">Change Password</a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
                 </nav>
             </div>
         </aside>
@@ -122,19 +117,20 @@ session_start();
                                     <div class="noti__item js-item-menu">
 
                                     </div>
-                                    <div class="noti__item js-item-menu">
+                               <!-- Police Activities Notification -->
+                                <div class="noti__item js-item-menu">
                                     <i class="zmdi zmdi-email"></i>
                                     <span class="quantity">3</span>
                                     <div class="email-dropdown js-dropdown">
                                         <div class="email__title">
-                                            <p>You have 3 New Messages</p>
+                                            <p>You have 3 New Police Activities</p>
                                         </div>
                                         <div class="email__item">
                                             <div class="image img-cir img-40">
                                                 <img src="images/icon/avatar-06.jpg" alt="Admin" />
                                             </div>
                                             <div class="content">
-                                                <p>New user registration request pending approval.</p>
+                                                <p>New police report submitted for review.</p>
                                                 <span>System Bot, 2 min ago</span>
                                             </div>
                                         </div>
@@ -143,7 +139,7 @@ session_start();
                                                 <img src="images/icon/avatar-05.jpg" alt="Admin" />
                                             </div>
                                             <div class="content">
-                                                <p>Backup completed successfully.</p>
+                                                <p>Backup of police records completed successfully.</p>
                                                 <span>System Bot, 1 hour ago</span>
                                             </div>
                                         </div>
@@ -152,29 +148,30 @@ session_start();
                                                 <img src="images/icon/avatar-04.jpg" alt="Admin" />
                                             </div>
                                             <div class="content">
-                                                <p>Monthly report has been generated.</p>
+                                                <p>Monthly police report summary generated.</p>
                                                 <span>System Bot, Yesterday</span>
                                             </div>
                                         </div>
                                         <div class="email__footer">
-                                            <a href="#">See all messages</a>
+                                            <a href="#">See all police activities</a>
                                         </div>
                                     </div>
                                 </div>
 
+                                <!-- Police Activities Notifications -->
                                 <div class="noti__item js-item-menu">
                                     <i class="zmdi zmdi-notifications"></i>
                                     <span class="quantity">3</span>
                                     <div class="notifi-dropdown js-dropdown">
                                         <div class="notifi__title">
-                                            <p>You have 3 Notifications</p>
+                                            <p>You have 3 Police Activity Notifications</p>
                                         </div>
                                         <div class="notifi__item">
                                             <div class="bg-c1 img-cir img-40">
                                                 <i class="zmdi zmdi-email-open"></i>
                                             </div>
                                             <div class="content">
-                                                <p>You received a message from the administrator.</p>
+                                                <p>New police report received for processing.</p>
                                                 <span class="date">Today, 08:15</span>
                                             </div>
                                         </div>
@@ -183,7 +180,7 @@ session_start();
                                                 <i class="zmdi zmdi-account-box"></i>
                                             </div>
                                             <div class="content">
-                                                <p>A new department has been added.</p>
+                                                <p>A new police activity log has been added.</p>
                                                 <span class="date">Yesterday, 14:22</span>
                                             </div>
                                         </div>
@@ -192,15 +189,16 @@ session_start();
                                                 <i class="zmdi zmdi-file-text"></i>
                                             </div>
                                             <div class="content">
-                                                <p>3 users uploaded new files.</p>
+                                                <p>3 new police records have been uploaded.</p>
                                                 <span class="date">2 days ago</span>
                                             </div>
                                         </div>
                                         <div class="notifi__footer">
-                                            <a href="#">All notifications</a>
+                                            <a href="#">All police notifications</a>
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
@@ -231,7 +229,7 @@ session_start();
                                                         }
                                                     ?>
                                                 </span>   
-                                            </div>
+                                           </div>
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
@@ -241,7 +239,7 @@ session_start();
                                                 <div class="account-dropdown__item">
                                                     <a href="#">
                                                         <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="account-dropdown__footer">
                                                 <a href="logout.php">
@@ -256,142 +254,224 @@ session_start();
                 </div>
             </header>
             <!-- HEADER DESKTOP-->
-<!-- MAIN CONTENT -->
+            <?php
+            include 'db_connection.php';
+            ?>
+
+<!-- MAIN CONTENT-->
 <div class="main-content">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
-            <!-- Registration Form -->
-            <div class="row justify-content-center">
-                <div class="col-md-10">
+
+            <!-- DataTable Row -->
+            <div class="row">
+                <div class="col-md-12 mt-5">
                     <div class="card">
-                        <div class="card-header bg-primary text-white">
-                            <h4 class="text-center">Register New User</h4>
+                        <div class="card-header bg-info text-white text-center">
+                            <h5 class="mb-0">Latest Police News</h5>
                         </div>
                         <div class="card-body">
-                            <form id="registerForm" class="row g-3" method="POST">
-                                <!-- Full Name -->
-                                <div class="col-md-4">
-                                    <label class="form-label">Full Name</label>
-                                    <input type="text" class="form-control" id="fullName" name="full_name" required>
-                                </div>
-
-                                <!-- Email -->
-                                <div class="col-md-4">
-                                    <label class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
-                                </div>
-
-                                <!-- Phone -->
-                                <div class="col-md-4">
-                                    <label class="form-label">Phone Number</label>
-                                    <input type="tel" class="form-control" id="phone" name="phone_number" required>
-                                </div>
-
-                                <?php
-                                include 'db_connection.php'; // Ensure your DB connection is here
-                                $sql = "SELECT id, department_name FROM departments";
-                                $result = $conn->query($sql);
-                                $departmentOptions = "";
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        $departmentOptions .= "<option value='" . $row['id'] . "'>" . $row['department_name'] . "</option>";
+                            <table id="newsTable" class="table table-bordered table-striped text-center">
+                                <thead class="thead-dark">
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Created At</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <?php
+                                    $news_sql = "SELECT id, title, content, DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at FROM police_records ORDER BY created_at DESC LIMIT 3";
+                                    $news_result = mysqli_query($conn, $news_sql);
+                                    while ($row = mysqli_fetch_assoc($news_result)) {
+                                        $id = $row['id'];
+                                        $title = htmlspecialchars($row['title']);
+                                        $content = nl2br(htmlspecialchars($row['content']));
+                                        $created_at = $row['created_at'];
+                                        echo "<tr>";
+                                        echo "<td>$title</td>";
+                                        echo "<td>$created_at</td>";
+                                        echo "<td>
+                                                <button class='btn btn-sm btn-info' onclick='viewContent(\"" . addslashes($title) . "\", `" . addslashes($content) . "`)'><i class='fas fa-eye'></i></button>
+                                                <button class='btn btn-sm btn-danger' onclick='deleteNews($id)'><i class='fas fa-trash-alt'></i></button>
+                                            </td>";
+                                        echo "</tr>";
                                     }
-                                } else {
-                                    $departmentOptions = "<option value=''>No departments found</option>";
-                                }
-                                $conn->close();
-                                ?>
+                                    ?>
+                                </tbody>
+                            </table>
 
-                                <!-- Select Department -->
-                                <div class="col-md-4">
-                                    <label class="form-label">Department</label>
-                                    <select class="form-control" id="department" name="department_id" required>
-                                        <option value="">Select Department</option>
-                                        <?php echo $departmentOptions; ?>
-                                    </select>
-                                </div>
-
-                                <!-- Password -->
-                                <div class="col-md-4">
-                                    <label class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" required>
-                                </div>
-
-                                <!-- Confirm Password -->
-                                <div class="col-md-4">
-                                    <label class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" id="confirmPassword" name="confirm_password" required>
-                                </div> </div>
-
-                                <!-- Submit Button -->
-                                <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-primary w-50">Register</button>
-                                </div><br>
-                            </form>
+                            <!-- Navigation Buttons -->
+                            <div class="d-flex justify-content-between mt-3">
+                                <button class="btn btn-primary" id="prevBtn">
+                                    <i class="fas fa-chevron-left"></i> Previous
+                                </button>
+                                <button class="btn btn-primary" id="nextBtn">
+                                    Next <i class="fas fa-chevron-right"></i>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div><br><br><br>  
+            </div>
+
         </div>
     </div>
 </div>
-<!-- END MAIN CONTENT -->
+<!-- END MAIN CONTENT-->
 
+<!-- Modal to View News -->
+<div class="modal fade" id="newsModal" tabindex="-1" role="dialog" aria-labelledby="newsModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header bg-info text-white">
+        <h5 class="modal-title" id="newsModalLabel">News Title</h5>
+        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body" id="newsContent">
+        <!-- Content dynamically added -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- JS Scripts -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('registerForm');
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
-
-            // Gather form data
-            const formData = new FormData(form);
-
-            // Use fetch to submit the form data via POST
-            fetch('reg-user.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                // Show SweetAlert on success
-                if (data.trim() === "Registration successful!") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success!',
-                        text: 'User registered successfully.',
-                    }).then(() => {
-                        // Optionally, reset the form or redirect to another page
-                        form.reset();
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: data,
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: 'An error occurred while registering.',
-                });
-            });
+    $(document).ready(function () {
+        $('#newsTable').DataTable({
+            "paging": false,
+            "searching": false,
+            "info": false
         });
+
+        $('#prevBtn').click(function () {
+            alert('Previous clicked');
+        });
+
+        $('#nextBtn').click(function () {
+            alert('Next clicked');
+        });
+
+        // Show SweetAlert if deleted=1 in URL
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('deleted') === '1') {
+            Swal.fire({
+                title: 'Deleted!',
+                text: 'The news item has been deleted.',
+                icon: 'success',
+                confirmButtonColor: '#3085d6'
+            });
+        }
     });
+
+    function viewContent(title, content) {
+        $('#newsModalLabel').text(title);
+        $('#newsContent').html(content);
+        $('#newsModal').modal('show');
+    }
+
+    function deleteNews(id) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "This news item will be permanently deleted!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Yes, delete it!',
+            cancelButtonText: 'Cancel'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.href = "deleting.php?delete=" + id;
+            }
+        });
+    }
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<script>
+    // Get the current year
+    var currentYear = new Date().getFullYear();
+    // Set the current year in the copyright section
+    document.getElementById("current-year").textContent = currentYear;
 </script>
 <script>
-    window.addEventListener('load', function () {
-        const loader = document.getElementById('loader-wrapper');
-        if (loader) {
-            loader.style.display = 'none';
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            height: 500,
+            events: [
+                {
+                    title: 'Police News Posted',
+                    start: '2025-04-08',
+                    color: '#007bff'
+                },
+                {
+                    title: 'Hospital Announcement',
+                    start: '2025-04-10',
+                    color: '#28a745'
+                },
+                {
+                    title: 'TRA Tax News',
+                    start: '2025-04-11',
+                    color: '#ffc107'
+                }
+                // You can load more dynamically using AJAX here
+            ]
+        });
+        calendar.render();
+    });
+</script>
+
+<!-- JS to render the chart (using Chart.js for example) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('departmentActivityChart').getContext('2d');
+
+    // News posted data for each category
+    var departmentData = {
+        labels: ['School', 'Hospital', 'TRA', 'Police'],
+        data: [20, 15, 30, 10], // Example values
+    };
+
+    // Determine the max value for highlighting
+    var maxValue = Math.max(...departmentData.data);
+    
+    var departmentActivityChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: departmentData.labels,
+            datasets: [{
+                label: 'News Posted',
+                data: departmentData.data,
+                backgroundColor: departmentData.data.map(value => 
+                    value === maxValue ? 'rgba(255, 0, 0, 0.5)' : 'rgba(54, 162, 235, 0.5)'
+                ),
+                borderColor: departmentData.data.map(value => 
+                    value === maxValue ? 'rgba(255, 0, 0, 1)' : 'rgba(54, 162, 235, 1)'
+                ),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
     });
 </script>
-
     <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->

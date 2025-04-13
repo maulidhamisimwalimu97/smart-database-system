@@ -1,6 +1,7 @@
 <?php
-session_start();
+session_start(); // Start session to access session data
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -10,7 +11,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title Page-->
-    <title>Admin-Dashboard</title>
+    <title>School-Dashboard</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -18,26 +19,28 @@ session_start();
     <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
     <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
 
+
     <!-- Bootstrap CSS-->
     <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
-    <!-- Vendor CSS-->
-    <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
-    <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
-    <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
-    <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
-    <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
-    <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
-    <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+     <!-- Bootstrap CSS-->
+     <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
+
+     <!-- Vendor CSS-->
+     <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
+     <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
+     <link href="vendor/wow/animate.css" rel="stylesheet" media="all">
+     <link href="vendor/css-hamburgers/hamburgers.min.css" rel="stylesheet" media="all">
+     <link href="vendor/slick/slick.css" rel="stylesheet" media="all">
+     <link href="vendor/select2/select2.min.css" rel="stylesheet" media="all">
+     <link href="vendor/perfect-scrollbar/perfect-scrollbar.css" rel="stylesheet" media="all">
+ 
 
     <!-- Main CSS-->
     <link href="css/theme.css" rel="stylesheet" media="all">
-    <link href="css/loader.css" rel="stylesheet" media="all">
-
-
+    <link href="css/new.css" rel="stylesheet" media="all">
 </head>
 
 <body>
-
         <!-- MENU SIDEBAR-->
         <aside class="menu-sidebar d-none d-lg-block">
             <div class="logo">
@@ -46,11 +49,11 @@ session_start();
             <div class="menu-sidebar__content js-scrollbar1">
                 <nav class="navbar-sidebar">
                     <ul class="list-unstyled navbar__list">
-                        <li>
-                            <a href="dashboard.php">
-                                <i class="fas fa-tachometer-alt"></i>Dashboard
-                            </a>
-                        </li>
+                    <li>
+                        <a href="dashboard.php">
+                            <i class="fas fa-tachometer-alt"></i>Dashboard
+                        </a>
+                    </li>
                         
                         <li class="has-sub">
                             <a class="js-arrow" href="#">
@@ -201,6 +204,7 @@ session_start();
                                         </div>
                                     </div>
                                 </div>
+
                                 <div class="account-wrap">
                                     <div class="account-item clearfix js-item-menu">
                                         <div class="image">
@@ -231,7 +235,7 @@ session_start();
                                                         }
                                                     ?>
                                                 </span>   
-                                            </div>
+                                           </div>
                                             </div>
                                             <div class="account-dropdown__body">
                                                 <div class="account-dropdown__item">
@@ -241,7 +245,7 @@ session_start();
                                                 <div class="account-dropdown__item">
                                                     <a href="#">
                                                         <i class="zmdi zmdi-settings"></i>Setting</a>
-                                                    </div>
+                                                </div>
                                             </div>
                                             <div class="account-dropdown__footer">
                                                 <a href="logout.php">
@@ -256,142 +260,177 @@ session_start();
                 </div>
             </header>
             <!-- HEADER DESKTOP-->
-<!-- MAIN CONTENT -->
+<!-- MAIN CONTENT-->
 <div class="main-content">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
-            <!-- Registration Form -->
-            <div class="row justify-content-center">
-                <div class="col-md-10">
+
+            <!-- Summary Cards Row -->
+            <div class="row">
+                        <?php
+            include 'db_connection.php'; // Ensure your DB connection is here
+
+            // Fetch the total number of departments
+            $sql = "SELECT COUNT(*) AS total_departments FROM departments";
+            $result = $conn->query($sql);
+            $row = $result->fetch_assoc();
+            $totalDepartments = $row['total_departments'];  // Storing the total department count
+
+            $conn->close();
+            ?>
+
+            <!-- Total Departments -->
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h5>Total Departments</h5>
+                    </div>
+                    <div class="card-body">
+                        <h3 class="text-center" id="total-departments"><?php echo $totalDepartments; ?></h3>
+                        <p class="text-center">Total number of departments</p>
+                    </div>
+                </div>
+            </div>
+
+
+                    <?php
+                    include 'db_connection.php';
+
+                    $count_sql = "SELECT COUNT(*) as total FROM news";
+                    $count_result = mysqli_query($conn, $count_sql);
+                    $count_row = mysqli_fetch_assoc($count_result);
+                    $total_news = $count_row['total'];
+                    ?>
+                    <!-- Total News -->
+                    <div class="col-md-4">
+                        <div class="card">
+                            <div class="card-header bg-success text-white">
+                                <h5>Total News Posted</h5>
+                            </div>
+                            <div class="card-body">
+                                <h3 class="text-center" id="total-news"><?= $total_news ?></h3>
+                                <p class="text-center">News articles posted in total</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <?php
+                    include 'db_connection.php';
+                    $user_sql = "SELECT COUNT(*) as total FROM users";
+                    $user_result = mysqli_query($conn, $user_sql);
+                    $user_row = mysqli_fetch_assoc($user_result);
+                    $total_users = $user_row['total'];
+                         ?>
+
+                <!-- Total Users -->
+                <div class="col-md-4">
                     <div class="card">
-                        <div class="card-header bg-primary text-white">
-                            <h4 class="text-center">Register New User</h4>
+                        <div class="card-header bg-warning text-white">
+                            <h5>Total Registered Users</h5>
                         </div>
                         <div class="card-body">
-                            <form id="registerForm" class="row g-3" method="POST">
-                                <!-- Full Name -->
-                                <div class="col-md-4">
-                                    <label class="form-label">Full Name</label>
-                                    <input type="text" class="form-control" id="fullName" name="full_name" required>
-                                </div>
-
-                                <!-- Email -->
-                                <div class="col-md-4">
-                                    <label class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
-                                </div>
-
-                                <!-- Phone -->
-                                <div class="col-md-4">
-                                    <label class="form-label">Phone Number</label>
-                                    <input type="tel" class="form-control" id="phone" name="phone_number" required>
-                                </div>
-
-                                <?php
-                                include 'db_connection.php'; // Ensure your DB connection is here
-                                $sql = "SELECT id, department_name FROM departments";
-                                $result = $conn->query($sql);
-                                $departmentOptions = "";
-                                if ($result->num_rows > 0) {
-                                    while ($row = $result->fetch_assoc()) {
-                                        $departmentOptions .= "<option value='" . $row['id'] . "'>" . $row['department_name'] . "</option>";
-                                    }
-                                } else {
-                                    $departmentOptions = "<option value=''>No departments found</option>";
-                                }
-                                $conn->close();
-                                ?>
-
-                                <!-- Select Department -->
-                                <div class="col-md-4">
-                                    <label class="form-label">Department</label>
-                                    <select class="form-control" id="department" name="department_id" required>
-                                        <option value="">Select Department</option>
-                                        <?php echo $departmentOptions; ?>
-                                    </select>
-                                </div>
-
-                                <!-- Password -->
-                                <div class="col-md-4">
-                                    <label class="form-label">Password</label>
-                                    <input type="password" class="form-control" id="password" name="password" required>
-                                </div>
-
-                                <!-- Confirm Password -->
-                                <div class="col-md-4">
-                                    <label class="form-label">Confirm Password</label>
-                                    <input type="password" class="form-control" id="confirmPassword" name="confirm_password" required>
-                                </div> </div>
-
-                                <!-- Submit Button -->
-                                <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-primary w-50">Register</button>
-                                </div><br>
-                            </form>
+                            <h3 class="text-center" id="total-users"><?= $total_users ?></h3>
+                            <p class="text-center">Users currently registered</p>
                         </div>
                     </div>
                 </div>
-            </div><br><br><br>  
+
+            <!-- Department Activity Graph Row -->
+            <div class="row mt-5">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header bg-info text-white">
+                            <h5 class="mb-0">Department News Activity</h5>
+                        </div>
+                        <div class="card-body">
+                            <canvas id="departmentActivityChart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 </div>
-<!-- END MAIN CONTENT -->
-
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- END MAIN CONTENT-->
+<!-- END PAGE CONTAINER-->
+</div>
+</div>
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('registerForm');
-        form.addEventListener('submit', function(e) {
-            e.preventDefault(); // Prevent default form submission
-
-            // Gather form data
-            const formData = new FormData(form);
-
-            // Use fetch to submit the form data via POST
-            fetch('reg-user.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                // Show SweetAlert on success
-                if (data.trim() === "Registration successful!") {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success!',
-                        text: 'User registered successfully.',
-                    }).then(() => {
-                        // Optionally, reset the form or redirect to another page
-                        form.reset();
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Error!',
-                        text: data,
-                    });
-                }
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error!',
-                    text: 'An error occurred while registering.',
-                });
-            });
-        });
-    });
+    // Get the current year
+    var currentYear = new Date().getFullYear();
+    // Set the current year in the copyright section
+    document.getElementById("current-year").textContent = currentYear;
 </script>
 <script>
-    window.addEventListener('load', function () {
-        const loader = document.getElementById('loader-wrapper');
-        if (loader) {
-            loader.style.display = 'none';
+    document.addEventListener('DOMContentLoaded', function() {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'dayGridMonth',
+            height: 500,
+            events: [
+                {
+                    title: 'Police News Posted',
+                    start: '2025-04-08',
+                    color: '#007bff'
+                },
+                {
+                    title: 'Hospital Announcement',
+                    start: '2025-04-10',
+                    color: '#28a745'
+                },
+                {
+                    title: 'TRA Tax News',
+                    start: '2025-04-11',
+                    color: '#ffc107'
+                }
+                // You can load more dynamically using AJAX here
+            ]
+        });
+        calendar.render();
+    });
+</script>
+
+<!-- JS to render the chart (using Chart.js for example) -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    var ctx = document.getElementById('departmentActivityChart').getContext('2d');
+
+    // News posted data for each category
+    var departmentData = {
+        labels: ['School', 'Hospital', 'TRA', 'Police'],
+        data: [20, 15, 30, 10], // Example values
+    };
+
+    // Determine the max value for highlighting
+    var maxValue = Math.max(...departmentData.data);
+    
+    var departmentActivityChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+            labels: departmentData.labels,
+            datasets: [{
+                label: 'News Posted',
+                data: departmentData.data,
+                backgroundColor: departmentData.data.map(value => 
+                    value === maxValue ? 'rgba(255, 0, 0, 0.5)' : 'rgba(54, 162, 235, 0.5)'
+                ),
+                borderColor: departmentData.data.map(value => 
+                    value === maxValue ? 'rgba(255, 0, 0, 1)' : 'rgba(54, 162, 235, 1)'
+                ),
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
         }
     });
 </script>
-
     <!-- Jquery JS-->
     <script src="vendor/jquery-3.2.1.min.js"></script>
     <!-- Bootstrap JS-->
