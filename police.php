@@ -11,7 +11,7 @@ session_start(); // Start session to access session data
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Title Page-->
-    <title>Police-Dashboard</title>
+    <title>Police-News</title>
 
     <!-- Fontfaces CSS-->
     <link href="css/font-face.css" rel="stylesheet" media="all">
@@ -254,169 +254,85 @@ session_start(); // Start session to access session data
                 </div>
             </header>
             <!-- HEADER DESKTOP-->
-<!-- MAIN CONTENT-->
+            <?php
+            include 'db_connection.php';
+            ?>
+
+<?php
+session_start();
+$user_id = $_SESSION['user_id']; // Retrieve the logged-in user ID
+?>
+
+<!-- MAIN CONTENT -->
 <div class="main-content">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
 
-            <!-- Summary Cards Row -->
-            <div class="row">
-                <?php
-                include 'db_connection.php'; // Ensure your DB connection is here
-
-                // Fetch the total number of police records (posted news count)
-                $count_sql = "SELECT COUNT(*) as total FROM police_records";
-                $count_result = mysqli_query($conn, $count_sql);
-                $count_row = mysqli_fetch_assoc($count_result);
-                $totalRecords = $count_row['total'];
-                ?>
-
-                <!-- Post New News Card -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header bg-primary text-white">
-                            <h5 class="card-title"><i class="fas fa-plus-circle"></i> Post New News</h5>
-                        </div>
-                        <div class="card-body text-center">
-                            <a href="post-news.php" class="btn btn-link">Post News</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- View News Card -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header bg-success text-white">
-                            <h5 class="card-title"><i class="fas fa-eye"></i> View News</h5>
-                        </div>
-                        <div class="card-body text-center">
-                            <a href="view-news.php" class="btn btn-link">View All News</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Total News Count Card -->
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header bg-warning text-white">
-                            <h5 class="card-title"><i class="fas fa-newspaper"></i> Total News Posted</h5>
-                        </div>
-                        <div class="card-body text-center">
-                            <h3 id="total-news"><?= $totalRecords ?></h3>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-            <!-- DataTable Row -->
-            <div class="row mt-5">
-                <div class="col-md-12">
-                    <div class="card">
-                        <div class="card-header bg-info text-white">
-                        <h5 class="mb-0 text-center">Latest Police News</h5>
+            <!-- News Posting Form -->
+            <div class="row justify-content-center">
+                <div class="col-md-10">
+                    <div class="card shadow">
+                        <div class="card-header bg-primary text-white text-center">
+                            <h4>Post New Police News</h4>
                         </div>
                         <div class="card-body">
-                            <table id="newsTable" class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Title</th>
-                                        <th class='text-right'>Created At</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    // Fetch the latest 3 news records from the police_records table
-                                    $news_sql = "SELECT title, DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at FROM police_records ORDER BY created_at DESC LIMIT 3";
-                                    $news_result = mysqli_query($conn, $news_sql);
+                            <form id="newsForm" class="row g-3" action="police_action.php" method="POST" enctype="multipart/form-data">
 
-                                    while ($row = mysqli_fetch_assoc($news_result)) {
-                                        echo "<tr>";
-                                        echo "<td>" . htmlspecialchars($row['title']) . "</td>";
-                                        echo "<td class='text-right'>" . htmlspecialchars($row['created_at']) . "</td>";
-                                        echo "</tr>";
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
+                                <!-- Hidden user ID -->
+                                <input type="hidden" name="user_id" value="<?php echo $user_id; ?>">
 
-                            <!-- Navigation Buttons for Previous and Next -->
-                            <div class="d-flex justify-content-between mt-3">
-                                <button class="btn btn-primary" id="prevBtn">
-                                    <i class="fas fa-chevron-left"></i> Previous
-                                </button>
-                                <button class="btn btn-primary" id="nextBtn">
-                                    Next <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
+                                <!-- Title -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Title <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control" name="title" required>
+                                </div>
+
+                                <!-- Image (optional) -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Upload Image (optional)</label>
+                                    <input type="file" class="form-control" name="image" accept="image/*">
+                                </div>
+
+                                <!-- File (optional) -->
+                                <div class="col-md-6">
+                                    <label class="form-label">Attach File (PDF - optional)</label>
+                                    <input type="file" class="form-control" name="file" accept=".pdf">
+                                </div>
+
+                                <!-- Content -->
+                                <div class="col-md-12">
+                                    <label class="form-label">Content <span class="text-danger">*</span></label>
+                                    <textarea class="form-control" name="content" rows="5" required></textarea>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="col-md-12 text-center mt-3">
+                                    <button type="submit" name="submit" class="btn btn-success w-50">Post News</button>
+                                </div>
+
+                            </form>
                         </div>
                     </div>
                 </div>
-            </div>
+            </div><br><br><br>
 
         </div>
     </div>
 </div>
-<!-- END MAIN CONTENT-->
-
-<!-- Add DataTable JS and CSS -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+<!-- END MAIN CONTENT -->
+<?php if (isset($_SESSION['alert'])): ?>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
-$(document).ready(function () {
-    var offset = 0;
-    var limit = 3;
-    var totalRecords = <?= $totalRecords ?>;
-
-    function loadNews() {
-        $.ajax({
-            url: 'fetch_paginated_news.php',
-            type: 'GET',
-            data: { offset: offset },
-            success: function (data) {
-                const records = JSON.parse(data);
-                const tbody = $('#newsTable tbody');
-                tbody.empty();
-
-                if (records.length > 0) {
-                    records.forEach(function (row) {
-                        tbody.append(
-                            `<tr><td>${row.title}</td><td class="text-right">${row.created_at}</td></tr>`
-                        );
-                    });
-                } else {
-                    tbody.append(`<tr><td colspan="2" class="text-center">No more news</td></tr>`);
-                }
-
-                // Disable prev if at start
-                $('#prevBtn').prop('disabled', offset === 0);
-
-                // Disable next if we've reached the end
-                $('#nextBtn').prop('disabled', offset + limit >= totalRecords);
-            }
-        });
-    }
-
-    // Load initial data
-    loadNews();
-
-    $('#nextBtn').click(function () {
-        offset += limit;
-        loadNews();
+    Swal.fire({
+        icon: '<?php echo $_SESSION['alert']['type']; ?>',
+        title: '<?php echo ucfirst($_SESSION['alert']['type']); ?>',
+        text: '<?php echo $_SESSION['alert']['message']; ?>',
+        confirmButtonText: 'OK'
     });
-
-    $('#prevBtn').click(function () {
-        if (offset >= limit) {
-            offset -= limit;
-            loadNews();
-        }
-    });
-});
 </script>
+<?php unset($_SESSION['alert']); ?>
+<?php endif; ?>
 
-<!-- END PAGE CONTAINER-->
-</div>
-</div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
