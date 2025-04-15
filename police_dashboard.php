@@ -74,10 +74,7 @@ session_start(); // Start session to access session data
                         </a>                                
                         <ul class="list-unstyled navbar__sub-list js-sub-list">
                             <li>
-                                <a href="Greport.php">Generate Report</a>
-                            </li>
-                            <li>
-                                <a href="view-report.php">View Report</a>
+                                <a href="prepo.php">Generate Report</a>
                             </li>
                         </ul>
                     </li>

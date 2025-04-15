@@ -48,31 +48,30 @@
 </head>
 <body>
 
-    <div class="login-container">
-        <h3>Smart Database System</h3>
-        <?php if (isset($_GET['error']) && $_GET['error'] == 1): ?>
+<div class="login-container">
+    <h3>Smart Database System</h3>
+
+    <?php if (isset($_GET['error'])): ?>
         <div class="alert alert-danger text-center" role="alert">
-            Invalid email or password.
+            <?= htmlspecialchars($_GET['error']) ?>
         </div>
-       <?php endif; ?>
-        <form action="login_action.php" method="POST">
-            <div class="form-group">
-                <label for="username">Username</label>
-                <input type="text" name="username" class="form-control" required placeholder="Enter your email">
-            </div>
+    <?php endif; ?>
 
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" name="password" class="form-control" required placeholder="Enter your password">
-            </div>
+    <form action="login_action.php" method="POST">
+        <div class="form-group">
+            <label for="username">Username</label>
+            <input type="text" name="username" class="form-control" required placeholder="Enter your email">
+        </div>
 
-            <button type="submit" class="btn btn-login btn-block">Login</button>
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" name="password" class="form-control" required placeholder="Enter your password">
+        </div>
 
-            <div class="text-center mt-3">
-                <a href="#">Forgot Password?</a>
-            </div>
-        </form>
-    </div>
+        <button type="submit" class="btn btn-login btn-block">Login</button>
 
-</body>
-</html> 
+        <div class="text-center mt-3">
+            <a href="#">Forgot Password?</a>
+        </div>
+    </form>
+</div>

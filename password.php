@@ -60,10 +60,10 @@ session_start(); // Start session to access session data
                         </a>                            
                         <ul class="list-unstyled navbar__sub-list js-sub-list">
                             <li>
-                                <a href="news.php">New News</a>
+                                <a href="police.php">New News</a>
                             </li>
                             <li>
-                                <a href="view-news.php">View News</a>
+                                <a href="police-news.php">View News</a>
                             </li>
                         </ul>
                     </li>
@@ -251,149 +251,85 @@ session_start(); // Start session to access session data
                 </div>
             </header>
             <!-- HEADER DESKTOP-->
-            <?php
-            include 'db_connection.php';
-            ?>
-
 <!-- MAIN CONTENT-->
 <div class="main-content">
     <div class="section__content section__content--p30">
         <div class="container-fluid">
 
-            <!-- DataTable Row -->
-            <div class="row">
-                <div class="col-md-12 mt-5">
-                    <div class="card">
-                        <div class="card-header bg-info text-white text-center">
-                            <h5 class="mb-0">Latest Police News</h5>
-                        </div>
-                        <div class="card-body">
-                            <table id="newsTable" class="table table-bordered table-striped text-center">
-                                <thead class="thead-dark">
-                                    <tr>
-                                        <th>Title</th>
-                                        <th>Created At</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <?php
-                                    $news_sql = "SELECT id, title, content, DATE_FORMAT(created_at, '%Y-%m-%d') AS created_at FROM police_records ORDER BY created_at DESC LIMIT 3";
-                                    $news_result = mysqli_query($conn, $news_sql);
-                                    while ($row = mysqli_fetch_assoc($news_result)) {
-                                        $id = $row['id'];
-                                        $title = htmlspecialchars($row['title']);
-                                        $content = nl2br(htmlspecialchars($row['content']));
-                                        $created_at = $row['created_at'];
-                                        echo "<tr>";
-                                        echo "<td>$title</td>";
-                                        echo "<td>$created_at</td>";
-                                        echo "<td>
-                                                <button class='btn btn-sm btn-info' onclick='viewContent(\"" . addslashes($title) . "\", `" . addslashes($content) . "`)'><i class='fas fa-eye'></i></button>
-                                                <button class='btn btn-sm btn-danger' onclick='deleteNews($id)'><i class='fas fa-trash-alt'></i></button>
-                                            </td>";
-                                        echo "</tr>";
-                                    }
-                                    ?>
-                                </tbody>
-                            </table>
-
-                            <!-- Navigation Buttons -->
-                            <div class="d-flex justify-content-between mt-3">
-                                <button class="btn btn-primary" id="prevBtn">
-                                    <i class="fas fa-chevron-left"></i> Previous
-                                </button>
-                                <button class="btn btn-primary" id="nextBtn">
-                                    Next <i class="fas fa-chevron-right"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<!-- Change Password Section -->
+<div class="row mt-5">
+    <div class="col-md-6 offset-md-3">
+        <div class="card shadow">
+            <div class="card-header bg-info text-white text-center">
+                <h5>Change Password</h5>
             </div>
-
+            <div class="card-body">
+                <form id="changePasswordForm">
+                    <div class="form-group">
+                        <label>Current Password</label>
+                        <input type="password" name="current_password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>New Password</label>
+                        <input type="password" name="new_password" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Confirm New Password</label>
+                        <input type="password" name="confirm_password" class="form-control" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block mt-3">Update Password</button>
+                </form>
+            </div>
         </div>
     </div>
 </div>
-<!-- END MAIN CONTENT-->
-
-<!-- Modal to View News -->
-<div class="modal fade" id="newsModal" tabindex="-1" role="dialog" aria-labelledby="newsModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
-    <div class="modal-content">
-      <div class="modal-header bg-info text-white">
-        <h5 class="modal-title" id="newsModalLabel">News Title</h5>
-        <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body" id="newsContent">
-        <!-- Content dynamically added -->
-      </div>
-    </div>
-  </div>
 </div>
-
-<!-- JS Scripts -->
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</div>
+</div>
+</div>
+<!-- END MAIN CONTENT-->
+<!-- Include jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Include SweetAlert2 -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
-    $(document).ready(function () {
-        $('#newsTable').DataTable({
-            "paging": false,
-            "searching": false,
-            "info": false
-        });
+$(document).ready(function () {
+    $('#changePasswordForm').submit(function (e) {
+        e.preventDefault();
 
-        $('#prevBtn').click(function () {
-            alert('Previous clicked');
-        });
-
-        $('#nextBtn').click(function () {
-            alert('Next clicked');
-        });
-
-        // Show SweetAlert if deleted=1 in URL
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('deleted') === '1') {
-            Swal.fire({
-                title: 'Deleted!',
-                text: 'The news item has been deleted.',
-                icon: 'success',
-                confirmButtonColor: '#3085d6'
-            });
-        }
-    });
-
-    function viewContent(title, content) {
-        $('#newsModalLabel').text(title);
-        $('#newsContent').html(content);
-        $('#newsModal').modal('show');
-    }
-
-    function deleteNews(id) {
-        Swal.fire({
-            title: 'Are you sure?',
-            text: "This news item will be permanently deleted!",
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#d33',
-            cancelButtonColor: '#6c757d',
-            confirmButtonText: 'Yes, delete it!',
-            cancelButtonText: 'Cancel'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.href = "deleting.php?delete=" + id;
+        $.ajax({
+            url: 'change_password.php',
+            method: 'POST',
+            data: $(this).serialize(),
+            success: function (response) {
+                if (response.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: response.message
+                    });
+                    $('#changePasswordForm')[0].reset();
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: response.message
+                    });
+                }
+            },
+            error: function (xhr, status, error) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops!',
+                    text: 'Something went wrong!'
+                });
+                console.error("AJAX Error:", error);
             }
         });
-    }
+    });
+});
 </script>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
 <script>
     // Get the current year
     var currentYear = new Date().getFullYear();
